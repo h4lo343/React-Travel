@@ -1,6 +1,7 @@
 import { ThunkAction } from "redux-thunk"
 import { RootState } from "../store"
 import axios from "axios"
+import { productList1 } from "../../mockup"
 
 export const FETCH_RECOMMEND_PRODUCTS_START = "FETCH_RECOMMEND_PRODUCTS_START"
 export const FETCH_RECOMMEND_PRODUCTS_SUCCESS = "FETCH_RECOMMEND_PRODUCTS_SUCCESS"
@@ -21,7 +22,7 @@ interface FetchRecommendProductFailAction {
   payload: any 
 }
 
-export type RecoomendProductsActions = FetchRecommendProductStartAction | FetchRecommendProductSuccessAction | FetchRecommendProductFailAction
+export type RecomendProductsActions = FetchRecommendProductStartAction | FetchRecommendProductSuccessAction | FetchRecommendProductFailAction
 
 export const fetchRecommendProductStartActionCreator =
   (): FetchRecommendProductStartAction => {
@@ -48,10 +49,10 @@ export const fetchRecommendProductFailActionCreator = (
   };
 };
 
-export const giveMeDataActionCreator = ():ThunkAction<void, RootState, any, RecoomendProductsActions> =>async (dispatch, getState) => {
+export const giveMeDataActionCreator = ():ThunkAction<void, RootState, any, RecomendProductsActions> =>async (dispatch, getState) => {
   dispatch(fetchRecommendProductFailActionCreator) 
   try {
-    const {data} = await axios.get("https://d8695eab-5355-45ef-9c36-0d34cd1fe4fb.mock.pstmn.io/productList")
+    const data = productList1 
     dispatch(fetchRecommendProductSuccessActionCreator(data))
   } catch (error) {
     if (error instanceof Error) {
