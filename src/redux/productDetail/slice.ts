@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import { resolve } from "path"
 import thunk from "redux-thunk"
+import { json } from "stream/consumers"
 import { productList1 } from "../../mockup"
 
 interface ProductDetailState {
@@ -17,16 +18,10 @@ const initialState : ProductDetailState = {
  
 export const getProductDetail = createAsyncThunk(
   "productDetail/getProductDetail",
-    (touristRouteID: string, thunkAPI) => {
-         new Promise(()=>{
-          const data = productList1
-          return data
-        }) 
-         
-         
+     async (touristRoutedID: string, thunkAPI) => {
         
-      
-   }
+     }
+   
 )
 
 export const productDetailSlice = createSlice({
@@ -36,20 +31,12 @@ export const productDetailSlice = createSlice({
     
   },
   extraReducers: { //these 3 actions are automatically created by redux/toolkit
-                   //to deal with aysnc action
-                   //automatically mapping
-    [getProductDetail.pending.type]: (state) => {
-      // return {...state, loading: true}
-      state.loading = true
-    },
-    [getProductDetail.fulfilled.type]: (state, action) => {
-      state.loading = false
-      state.data = action.payload
-      state.error = null 
-    },
-    [getProductDetail.rejected.type]: (state, action: PayloadAction<string|null>) => {
-      state.loading = false
-      state.error = action.payload
-    } 
+       [getProductDetail.pending.type] : (state) => {
+        state.loading =true
+       },
+       [getProductDetail.fulfilled.type]: (state, action) => {
+        state.loading = false
+        state.data = action.payload
+       }     //to deal with aysnc actio
   }
 })

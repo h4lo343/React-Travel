@@ -50,9 +50,9 @@ export const fetchRecommendProductFailActionCreator = (
 };
 
 export const giveMeDataActionCreator = ():ThunkAction<void, RootState, any, RecomendProductsActions> =>async (dispatch, getState) => {
-  dispatch(fetchRecommendProductFailActionCreator) 
+  dispatch(fetchRecommendProductStartActionCreator()) 
   try {
-    const data = productList1 
+    const {data} = await axios.get("http://123.56.149.216:8080/api/productCollections");
     dispatch(fetchRecommendProductSuccessActionCreator(data))
   } catch (error) {
     if (error instanceof Error) {

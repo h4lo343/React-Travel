@@ -9,6 +9,8 @@ interface PropsType {
     products: any[];
 }
 
+ 
+
 export const ProductCollection: React.FC<PropsType> = ({title, sideImage, products}) => {
      
     return (
